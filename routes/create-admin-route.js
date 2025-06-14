@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Admin = require('../models/Admin');
+const Admin = require('../models/Admin'); // ✅ Correct path
 const bcrypt = require('bcryptjs');
 
-// Create a default admin if not exists
+// Accessible at: /api/create-admin
 router.get('/api/create-admin', async (req, res) => {
   try {
     const existingAdmin = await Admin.findOne({ email: 'admin@example.com' });
@@ -12,6 +12,7 @@ router.get('/api/create-admin', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash('admin123', 10);
+
     const admin = new Admin({
       name: 'Admin',
       email: 'admin@example.com',
@@ -22,7 +23,7 @@ router.get('/api/create-admin', async (req, res) => {
     res.status(201).json({ success: true, message: 'Admin created successfully' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: 'Server Error' });
+    res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 
