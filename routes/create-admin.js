@@ -3,7 +3,8 @@ const router = express.Router();
 const Admin = require('../models/Admin');
 const bcrypt = require('bcryptjs');
 
-router.get('/api/create-admin', async (req, res) => {
+// This route will create an admin ONCE
+router.get('/', async (req, res) => {
   try {
     const existingAdmin = await Admin.findOne({ email: 'admin@example.com' });
     if (existingAdmin) {
@@ -11,16 +12,16 @@ router.get('/api/create-admin', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash('admin123', 10);
-
-    const admin = new Admin({
+    const newAdmin = new Admin({
+      name: 'Super Admin',
       email: 'admin@example.com',
       password: hashedPassword,
     });
 
-    await admin.save();
+    await newAdmin.save();
     res.status(201).json({ success: true, message: 'Admin created successfully' });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });

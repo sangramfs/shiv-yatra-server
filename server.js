@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // ✅ TEMP route to create admin user once
-app.use('/api/dev', require('./routes/create-admin-route'));
+app.use('/api/dev', require('./routes/create-admin'));
 
 // Public Routes
 app.use('/api/admin', require('./routes/auth'));
