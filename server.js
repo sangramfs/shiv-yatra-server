@@ -32,6 +32,11 @@ app.use('/api/admin/gallery', require('./routes/gallery'));
 app.use('/api/admin/bookings', require('./routes/bookings'));
 app.use('/api/admin/contacts', require('./routes/contacts'));
 
+// ✅ Optional: root route
+app.get('/', (req, res) => {
+  res.send('🚀 Shiv Yatra API is live!');
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
