@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 // ✅ TEMP route to create admin user once
 app.use('/api/dev', require('./routes/create-admin-route'));
 
-// Routes
+// Public Routes
 app.use('/api/admin', require('./routes/auth'));
 app.use('/api/packages', require('./routes/packages'));
 app.use('/api/gallery', require('./routes/gallery'));
