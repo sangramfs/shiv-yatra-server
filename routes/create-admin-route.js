@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Admin = require('../models/Admin'); // ✅ Correct path
+const Admin = require('../models/Admin');
 const bcrypt = require('bcryptjs');
 
-// Accessible at: /api/create-admin
 router.get('/api/create-admin', async (req, res) => {
   try {
     const existingAdmin = await Admin.findOne({ email: 'admin@example.com' });
@@ -14,7 +13,6 @@ router.get('/api/create-admin', async (req, res) => {
     const hashedPassword = await bcrypt.hash('admin123', 10);
 
     const admin = new Admin({
-      name: 'Admin',
       email: 'admin@example.com',
       password: hashedPassword,
     });
